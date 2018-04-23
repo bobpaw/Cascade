@@ -1,0 +1,19 @@
+language: arduino
+
+python:
+  - 2.7
+
+sudo: required
+git:
+    depth: false
+
+cache:
+    directories:
+      - ".platformio"
+
+before_install:
+  - sudo python -m pip install -U pip
+  - pip install --user -U platformio
+
+script:
+  - platformio run
