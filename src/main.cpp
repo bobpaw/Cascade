@@ -27,7 +27,6 @@ uint8_t add_count = 0;
 void setup () {
   boardmap = (uint16_t*) calloc(HEIGHT * WIDTH, sizeof(*boardmap)); // Use calloc to initialize
   matrix.begin();
-  matrix.show();
   matrix.setBrightness(10);
   Serial.begin(115200);
 
@@ -43,6 +42,7 @@ void loop () {
 
   // Wipe the screen
   matrix.fillScreen(black);
+  matrix.show();
 
   // Move everything down one space internally
   for (int y = HEIGHT - 1; y > 0; y--) {
@@ -57,9 +57,9 @@ void loop () {
   }
 
   // Randomly create some new rain
-  add_count = random(WIDTH);
+  add_count = random(0, WIDTH);
   for (int i = 0; i < add_count; i++) {
-    boardmap[random(WIDTH)] = top_color;
+    boardmap[random(0, WIDTH)] = top_color;
   }
 
   // Draw pixels from internal map
