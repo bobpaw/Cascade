@@ -7,7 +7,7 @@
 #define WIDTH 10
 
 
-uint16_t ** boardmap = NULL; // Internal map of values
+uint16_t * boardmap = NULL; // Internal map of values
 
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(WIDTH, HEIGHT, 3,
                                                NEO_MATRIX_LEFT + NEO_MATRIX_TOP +
@@ -22,7 +22,7 @@ uint16_t black = 0;
 uint8_t add_count = 0;
 
 void setup () {
-  boardmap = calloc(HEIGHT * WIDTH, sizeof(uint16_t)); // Use calloc to initialize
+  boardmap = (uint16_t*) calloc(HEIGHT * WIDTH, sizeof(*boardmap)); // Use calloc to initialize
   matrix.begin();
   matrix.show();
   matrix.setBrightness(10);
