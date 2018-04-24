@@ -3,6 +3,9 @@
 #include <Adafruit_NeoPixel.h>
 #include <Adafruit_NeoMatrix.h>
 
+// Required for GFX on PlatformIO
+#include <SPI.h>
+
 #define HEIGHT 30
 #define WIDTH 10
 
