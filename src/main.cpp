@@ -7,7 +7,7 @@
 #define WIDTH 10
 
 
-uint16_t ** map = NULL; // Internal map of values
+uint16_t ** boardmap = NULL; // Internal map of values
 
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(WIDTH, HEIGHT, 3,
                                                NEO_MATRIX_LEFT + NEO_MATRIX_TOP +
@@ -22,7 +22,7 @@ uint16_t black = 0;
 uint8_t add_count = 0;
 
 void setup () {
-  map = calloc(HEIGHT * WIDTH, sizeof(**map)); // Use calloc to initialize
+  boardmap = calloc(HEIGHT * WIDTH, sizeof(**boardmap)); // Use calloc to initialize
   matrix.begin();
   matrix.show();
   matrix.setBrightness(10);
@@ -44,26 +44,26 @@ void loop () {
   // Move everything down one space internally
   for (int y = WIDTH - 2; y > 0; y--) {
     for (int x = 0; x < WIDTH; x++) {
-      map[(y+1) * WIDTH + x] = map[y * WIDTH + x];
+      boardmap[(y+1) * WIDTH + x] = map[y * WIDTH + x];
     }
   }
 
   // Clear the top row
   for (int x = 0; x < WIDTH; x++) {
-    map[x] = black;
+    boardmap[x] = black;
   }
 
   // Randomly create some new rain
   add_count = random(WIDTH);
   for (int i = 0; i < add_count; i++) {
-    map[random(WIDTH)] = top_color;
+    boardmap[random(WIDTH)] = top_color;
   }
 
   // Draw pixels from internal map
   for (int y = 0; y < HEIGHT; y++) {
     for (int x = 0; x < WIDTH; x++) {
-      if (map[y * WIDTH + x] != black) {
-        matrix.drawPixel(int16_t(x), int16_t(y), map[y * WIDTH + x]);
+      if (boardmap[y * WIDTH + x] != black) {
+        matrix.drawPixel(int16_t(x), int16_t(y), boardmap[y * WIDTH + x]);
       }
     }
   }
