@@ -22,7 +22,7 @@ uint16_t black = 0;
 uint8_t add_count = 0;
 
 void setup () {
-  boardmap = calloc(HEIGHT * WIDTH, sizeof(**boardmap)); // Use calloc to initialize
+  boardmap = calloc(HEIGHT * WIDTH, sizeof(uint16_t)); // Use calloc to initialize
   matrix.begin();
   matrix.show();
   matrix.setBrightness(10);
@@ -44,7 +44,7 @@ void loop () {
   // Move everything down one space internally
   for (int y = WIDTH - 2; y > 0; y--) {
     for (int x = 0; x < WIDTH; x++) {
-      boardmap[(y+1) * WIDTH + x] = map[y * WIDTH + x];
+      boardmap[(y+1) * WIDTH + x] = boardmap[y * WIDTH + x];
     }
   }
 
