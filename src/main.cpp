@@ -6,7 +6,7 @@
 // Required for GFX on PlatformIO
 #include <SPI.h>
 
-#define HEIGHT 30
+#define HEIGHT 45
 #define WIDTH 10
 
 
@@ -45,9 +45,9 @@ void loop () {
   matrix.fillScreen(black);
 
   // Move everything down one space internally
-  for (int y = WIDTH - 2; y > 0; y--) {
+  for (int y = HEIGHT - 1; y > 0; y--) {
     for (int x = 0; x < WIDTH; x++) {
-      boardmap[(y+1) * WIDTH + x] = boardmap[y * WIDTH + x];
+      boardmap[y * WIDTH + x] = boardmap[(y-1) * WIDTH + x];
     }
   }
 
@@ -71,4 +71,5 @@ void loop () {
     }
   }
   matrix.show();
+  delay(100);
 }
