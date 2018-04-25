@@ -16,8 +16,8 @@
 byte * boardmap = NULL; // Internal map of values
 
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(WIDTH, HEIGHT, 3,
-                                               NEO_MATRIX_LEFT + NEO_MATRIX_TOP +
-                                               NEO_MATRIX_COLUMNS + NEO_MATRIX_PROGRESSIVE,
+                                               NEO_MATRIX_TOP + NEO_MATRIX_RIGHT +
+                                               NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG,
                                                NEO_GRB + NEO_KHZ800);
 
 uint16_t top_color = 0; // Stored in boardmap as 1
@@ -61,15 +61,19 @@ void loop () {
   }
 
   // Randomly create some new rain
-  add_count = random(0, WIDTH);
-  for (int i = 0; i < add_count; i++) {
-    boardmap[random(0, WIDTH)] = 1;
-  }
+  /* add_count = 4;
+   * for (int i = 0; i < add_count; i++) {
+   *   boardmap[random(0, WIDTH)] = 1;
+   * }
+  */
+  boardmap[2] = 1;
+  boardmap[1] = 1;
+  boardmap[9] = 1;
 
   // Draw pixels from internal map
-  for (int16_t y = 0; y < HEIGHT; y++) {
-    for (int16_t x = 0; x < WIDTH; x++) {
-      switch (boardmap[int(y) * WIDTH + int(x)]) {
+  for (int y = 0; y < HEIGHT; y++) {
+    for (int x = 0; x < WIDTH; x++) {
+      switch (boardmap[y * WIDTH + x]) {
       case 0:
         color = black;
         break;
