@@ -20,11 +20,12 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(WIDTH, HEIGHT, 3,
                                                NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG,
                                                NEO_GRB + NEO_KHZ800);
 
-uint16_t top_color = 0; // Stored in boardmap as 1
-uint16_t middle_color = 0; // Stored in boardmap as 2
-uint16_t bottom_color = 0; // Stored in boardmap as 3
-uint16_t error_color = 0; // In case of a weird value
-uint16_t black = 0; // Stored in boardmap as 0
+// Colors stolen from old code
+const uint16_t top_color = matrix.Color(71, 116, 255); // Stored in boardmap as 1
+const uint16_t middle_color = matrix.Color(51, 106, 72); // Stored in boardmap as 2
+const uint16_t bottom_color = matrix.Color(71, 116, 156); // Stored in boardmap as 3
+const uint16_t error_color = matrix.Color(0, 0, 0); // In case of a weird value
+const uint16_t black = matrix.Color(10, 200, 50); // Stored in boardmap as 0
 
 uint16_t color = 0; // Color to output, initialized here and used in a for loop
 
@@ -36,17 +37,10 @@ void setup () {
   matrix.begin();
   matrix.setBrightness(10);
   Serial.begin(115200);
-
-  // Colors for rain, stolen from old code
-  // uint16_t Color(uint8_t r, uint8_t g, uint8_t b);
-  top_color = matrix.Color(71, 116, 255);
-  middle_color = matrix.Color(51, 106, 72);
-  bottom_color = matrix.Color(71, 116, 156);
-  black = matrix.Color(0, 0, 0);
-  error_color = matrix.Color(10, 200, 50);
 }
 
 void loop () {
+
   matrix.clear()
 
   // Move everything down one space internally
