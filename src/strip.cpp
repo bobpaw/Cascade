@@ -9,7 +9,8 @@
 
 byte * boardmap = NULL; // Internal map of values
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(WIDTH, HEIGHT, 3, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(WIDTH * HEIGHT, 3, NEO_GRB + 
+NEO_KHZ800);
 
 uint16_t location (int x, int y) {
   uint16_t result = HEIGHT * WIDTH;
