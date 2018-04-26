@@ -41,7 +41,7 @@ void setup () {
 
 void loop () {
 
-  matrix.clear()
+  matrix.clear();
 
   // Move everything down one space internally
   for (int y = HEIGHT - 1; y > 0; y--) {
